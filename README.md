@@ -14,8 +14,6 @@ A robust blogging platform backend built with Node.js, Express, and MongoDB. Blo
 
 📁 Project Structure
 bash
-Copy
-Edit
 blogify-backend/
 │
 ├── controllers/       # Route handlers (logic)
@@ -41,26 +39,17 @@ Testing Tools: Postman / Thunder Client
 
 ⚙️ Getting Started
 1. Clone the repo
-bash
-Copy
-Edit
 git clone https://github.com/chinmayjjg/blogify-backend.git
 cd blogify-backend
 2. Install dependencies
 bash
-Copy
-Edit
 npm install
 3. Setup .env
 env
-Copy
-Edit
 PORT=5000
 MONGO_URL=mongodb://localhost:27017/blogify
 4. Run the server
 bash
-Copy
-Edit
 npm run dev
 📡 API Endpoints
 Base URL: /api/posts
