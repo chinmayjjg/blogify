@@ -15,6 +15,7 @@ const app = express();
 app.use(express.json());
 app.use('/api/auth', authRoute);
 
+
 app.use('/api/posts', postRoutes);
 app.get("/",(req,res)=>{
   res.send("blogify api is runnign");
