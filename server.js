@@ -4,7 +4,7 @@ const dotenv=require("dotenv")
 const postRoutes= require ("./routs/postRouts");
 const authRoute = require('./routs/auth');
 const connectDB = require("./config/db");
-
+const cors = require("cors");
 
 
 
@@ -14,6 +14,11 @@ const app = express();
 
 app.use(express.json());
 app.use('/api/auth', authRoute);
+
+app.use(cors({
+  origin: "http://localhost:5173", // React dev server
+  credentials: true
+}));
 
 
 app.use('/api/posts', postRoutes);
