@@ -22,18 +22,29 @@ router.post("/register",async(req,res)=>{
 
 //login
 
-router.post("/login",async(req,res)=>{
-try{
-    const user=await User.findOne({email:req.body.email});
-    if(!user)return res.status(404).json({error:"user not found"});
+router.post("/login", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) return res.status(404).json({ error: "user not found" });
 
-    const isMatch=await bcrypt.compare(req.body.password,user.password);
-    if(!isMatch)return res.status(400).json({arror:"credantial not matched"});
+    const isMatch = await bcrypt.compare(req.body.password, user.password);
+    if (!isMatch) return res.status(400).json({ error: "credential not matched" });
 
-    const token=jwt.sign({id:user._id},process.env.JWT_SECRET);
-    res.json({token,user:{id:user._id,username:user.userName}});
-}catch(err){
-    res.status(500).json({error:err.message});
-}
+    // FIXED: include username inside the JWT token
+    const token = jwt.sign(
+      { id: user._id, username: user.username },
+      process.env.JWT_SECRET
+    );
+
+    res.json({
+      token,
+      user: { id: user._id, username: user.username }
+    });
+   
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
+
 module.exports =router;

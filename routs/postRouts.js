@@ -1,21 +1,23 @@
-const express=require ("express");
-const { createPost,
-     getAllPosts,
-     getpostById,
-     updatePost,
-     deletePost } = require('../controllers/postController');
-
-
-
+const express = require("express");
 const router = express.Router();
+const {
+  getAllPosts,
+  getpostById,
+  createPost,
+  updatePost,
+  deletePost,
+} = require("../controllers/postController");
 
-const auth=require("../middleware/auth")
-router.post('/', auth,createPost);
-router.get('/', getAllPosts);
+const verifyToken = require("../middleware/auth");
+
+// Apply middleware to protected routes
+router.post("/", verifyToken, createPost);
+router.put("/:id", verifyToken, updatePost);   // ✅ Fix here
+router.delete("/:id", verifyToken, deletePost);
+
+router.get("/", getAllPosts);
 router.get("/:id", getpostById);
-router.put("/:id", auth, updatePost);
-router.delete("/:id", auth, deletePost);
-
 
 module.exports = router;
+
 
